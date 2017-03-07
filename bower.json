@@ -4,11 +4,27 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "output"
+    "output",
+    "test",
+    "tests"
   ],
-  "dependencies": {
+  "repository": {
+      "type": "git",
+      "url": "git://github.com/doolse/purescript-records.git"
   },
+  "dependencies": {},
   "devDependencies": {
     "purescript-psci-support": "^2.0.0"
-  }
+  },
+  "homepage": "https://github.com/doolse/purescript-records",
+  "authors": [
+    "Jolse Maginnis <doolse@gmail.com>"
+  ],
+  "description": "Utility functions for purescripts Record type",
+  "main": "",
+  "keywords": [
+    "purescript",
+    "records"
+  ],
+  "license": "MIT"
 }

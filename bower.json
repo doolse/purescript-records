@@ -9,12 +9,12 @@
     "tests"
   ],
   "repository": {
-      "type": "git",
-      "url": "git://github.com/doolse/purescript-records.git"
+    "type": "git",
+    "url": "git://github.com/doolse/purescript-records.git"
   },
   "dependencies": {},
   "devDependencies": {
-    "purescript-psci-support": "^2.0.0"
+    "purescript-console": "ps-0.11"
   },
   "homepage": "https://github.com/doolse/purescript-records",
   "authors": [

@@ -1,8 +1,8 @@
 module Data.Record (
   merge,
   mergeDefaults,
-  class RowSubset,
-  OptionalDefaults(..)
+  class Subrow,
+  class MergeDefaults
 ) where
 
 -- | Merge two records together unsafely.
@@ -18,20 +18,15 @@ merge :: forall a b c. Union b a c => Record a -> Record b -> Record c
 merge = unsafeMerge
 
 -- | Proof that row `r` is a subset of row `s`
-class RowSubset (r :: # Type) (s :: # Type)
-instance rowSubset :: (Union r s st, Union s t st, Union t u s) => RowSubset r s
+class Subrow (r :: # Type) (s :: # Type)
+instance subrow :: Union r t s => Subrow r s
 
--- | Represents a record of default values `o`, which will be merged with a
--- | record that has at least fields `m`
-newtype OptionalDefaults (m :: # Type) o = OptionalDefaults (Record o)
+class MergeDefaults (o :: # Type) (mr :: # Type) (mo :: # Type)
+instance mergeInstance :: (Union o m mo, Union m r mr, Subrow r o) => MergeDefaults o mr mo
 
--- | Merge a record `mr` with optional default values.
+-- | Merge a record `mr` with optional default values `o`.
 -- |
--- | The record `mr` must consist of the fields from the `m` plus a subset
+-- | The record `mr` must consist of the common fields from `mo` and `mr` plus a subset
 -- | of fields from `o`. The result is the closed row `mo`.
-mergeDefaults :: forall m r o mr mo
-  .  Union m r mr
-  => Union m o mo
-  => RowSubset r o
-  => OptionalDefaults m o -> Record mr -> Record mo
-mergeDefaults (OptionalDefaults d) = unsafeMerge d
+mergeDefaults :: forall o mr mo. MergeDefaults o mr mo => Record o -> Record mr -> Record mo
+mergeDefaults = unsafeMerge

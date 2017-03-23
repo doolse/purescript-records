@@ -2,14 +2,14 @@ module Test.Main where
 
 import Prelude
 import Control.Monad.Eff.Console (log)
-import Data.Record (OptionalDefaults(..), mergeDefaults)
+import Data.Record (mergeDefaults)
 
 type Mandatory r = (x::Int|r)
 type Optional = (opt::String)
 type Properties = Record (Mandatory Optional)
 
-defaults :: OptionalDefaults (Mandatory ()) Optional
-defaults = OptionalDefaults {opt:"DefaultProp"}
+defaults :: {|Optional}
+defaults = {opt:"DefaultProp"}
 
 makeProps1 :: Properties
 makeProps1 = mergeDefaults defaults {x:2,opt:"makeProps1"}

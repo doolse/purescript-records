@@ -2,7 +2,7 @@ module Test.Main where
 
 import Prelude
 import Control.Monad.Eff.Console (log)
-import Data.Record (mergeDefaults)
+import Data.Record (merge)
 
 type Mandatory r = (x::Int|r)
 type Optional = (opt::String)
@@ -12,10 +12,10 @@ defaults :: {|Optional}
 defaults = {opt:"DefaultProp"}
 
 makeProps1 :: Properties
-makeProps1 = mergeDefaults defaults {x:2,opt:"makeProps1"}
+makeProps1 = merge defaults {x:2,opt:"makeProps1"}
 
 makeProps2 :: Properties
-makeProps2 = mergeDefaults defaults {x:2}
+makeProps2 = merge defaults {x:2}
 
 -- won't compile - extra label
 -- makeProps3 :: Properties

@@ -4,3 +4,6 @@
 /output/
 /.psc*
 /.psa*
+/docs
+/generated-docs
+
